@@ -7,6 +7,8 @@ import java.util.Scanner;
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;
 
+// TODO: Implement credentials checking here.
+
 public class TeacherApp {
 
     private static int arrSize = 100;
