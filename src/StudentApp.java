@@ -176,13 +176,17 @@ public class StudentApp {
         }
         if(choice > 0 && choice <= matCount) {
             choice--;
-            if(readingMats[choice].getBorrowedStatus()) {
+            if(readingMats[choice].getBorrowedStatus() && readingMats[choice].getBorrowerType().equals("Student")) {
                 readingMats[choice].setBorrowStatus(false, "N/A", "N/A", "N/A");
-                System.out.println("[SUCCESS] Material borrowed returned!");
+                System.out.println("[SUCCESS] Material returned!");
                 promptEnterKey();
             }
-            else {
-                System.out.println("[ERROR] Material currently unborrowed");
+            else if(!readingMats[choice].getBorrowedStatus()) {
+                System.out.println("[ERROR] Material currently unborrowed.");
+                promptEnterKey();
+            }
+            else if(!readingMats[choice].getBorrowerType().equals("Student")) {
+                System.out.println("[ERROR] Wrong borrower type.");
                 promptEnterKey();
             }
             saveReadingMats();
