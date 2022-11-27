@@ -1,3 +1,0 @@
-Book;Zach;r;false;N/A;N/A;N/A
-Newspaper;3;3;true;bossing;Teacher;2022/12/03
-Journal;4;4;false;N/A;N/A;N/A

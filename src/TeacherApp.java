@@ -184,13 +184,17 @@ public class TeacherApp {
         }
         if(choice > 0 && choice <= matCount) {
             choice--;
-            if(readingMats[choice].getBorrowedStatus()) {
+            if(readingMats[choice].getBorrowedStatus() && readingMats[choice].getBorrowerType().equals("Teacher")) {
                 readingMats[choice].setBorrowStatus(false, "N/A", "N/A", "N/A");
                 System.out.println("[SUCCESS] Material returned!");
                 promptEnterKey();
             }
-            else {
+            else if(!readingMats[choice].getBorrowedStatus()) {
                 System.out.println("[ERROR] Material currently unborrowed.");
+                promptEnterKey();
+            }
+            else if(!readingMats[choice].getBorrowerType().equals("Teacher")) {
+                System.out.println("[ERROR] Wrong borrower type.");
                 promptEnterKey();
             }
             saveReadingMats();
@@ -213,13 +217,21 @@ public class TeacherApp {
         }
         if(choice > 0 && choice <= matCount) {
             choice--;
-            if(readingMats[choice].getBorrowedStatus() && now.equals(readingMats[choice].getReturnDate())) {
+            if(readingMats[choice].getBorrowedStatus() && now.equals(readingMats[choice].getReturnDate()) && readingMats[choice].getBorrowerType().equals("Teacher")) {
                 readingMats[choice].setReturnDate(extendDate);
                 System.out.println("[SUCCESS] Material borrowing extended for 7 days!");
                 promptEnterKey();
             }
-            else {
-                System.out.println("[ERROR] Material currently unborrowed or not yet pending for extension.");
+            else if(!readingMats[choice].getBorrowedStatus()) {
+                System.out.println("[ERROR] Material currently unborrowed.");
+                promptEnterKey();
+            }
+            else if(!readingMats[choice].getBorrowerType().equals("Teacher")) {
+                System.out.println("[ERROR] Wrong borrower type.");
+                promptEnterKey();
+            }
+            else if(!now.equals(readingMats[choice].getReturnDate())) {
+                System.out.println("[ERROR] Material not pending for extension.");
                 promptEnterKey();
             }
             saveReadingMats();
@@ -229,7 +241,7 @@ public class TeacherApp {
             promptEnterKey();
         }
     }
-
+    
     public static void updateMatCount() {
         matCount = bookCount + newsCount + magCount + journCount;
     }
